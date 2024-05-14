@@ -2,6 +2,7 @@ import { useState } from 'react'
 
 import { Link } from 'react-router-dom';
 import OAuth from '../components/OAuth';
+import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
 
 export default function ForgptPassword() {
   
@@ -10,6 +11,18 @@ export default function ForgptPassword() {
   function onChange(e){
     setEmail(e.target.value);
     
+  }
+
+  async function onSubmit(e) {
+    e.preventDefault()
+    
+    try {
+      const auth = getAuth()
+      await sendPasswordResetEmail(auth, email)
+      alert('Email was sent')
+    } catch (error) {
+      alert('Could not send reset password')
+    }
   }
   return (
     <section>
@@ -21,7 +34,7 @@ export default function ForgptPassword() {
         />
       </div>
       <div className='w-full md:w-[67%] lg:w-[40%] lg:ml-20'>
-        <form >
+        <form onSubmit={onSubmit}>
           <input className='w-full px-4 py-2 text-xl mb-6 text-gray-700 bg-white border-gray-300 rounded transition ease-in-out' type='email' id='email' value={email} onChange={onChange}
             placeholder='E-mail address'
             />
