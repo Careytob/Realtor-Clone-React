@@ -6,7 +6,7 @@ import { getAuth, createUserWithEmailAndPassword, updateProfile } from 'firebase
 import { db } from '../firebase';
 import { doc, setDoc, serverTimestamp } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
-//import { toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 export default function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
@@ -45,7 +45,7 @@ export default function SignUp() {
       navigate("/");
     } catch (error) {
       //console.log(error)
-      //toast.error('Something went wrong with the registration');
+      toast.error('Something went wrong with the registration');
     }
   }
   return (
