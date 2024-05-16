@@ -14,6 +14,7 @@ export default function Header() {
                 setPageState('Profile')
             } else {
                 setPageState('Sign in');
+                //console.log();
             }
         })
     })
